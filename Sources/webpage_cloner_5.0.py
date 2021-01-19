@@ -17,7 +17,7 @@ CURR_DIR = os.path.dirname(os.path.realpath(__file__))+'/'
 def setup(n):
 
     # Open parameters configuration file to store parameters in a list
-    parameters_config_file = open("parameters_config_file.txt", "r")
+    parameters_config_file = open(CURR_DIR + "parameters_config_file.txt", "r")
     global parameters_array
     parameters_array = []
     parameters_lines = parameters_config_file.readlines() 
@@ -29,12 +29,12 @@ def setup(n):
     if n == 0:
         # If n == 0 then use the user created version of 
         # the "websites_config_file.txt" file
-        websites_config_file = open("websites_config_file.txt", "r")
+        websites_config_file = open(CURR_DIR + "websites_config_file.txt", "r")
     else:
         # If n != 0 then use the top nth websites of Alexa List
         get_websites.get_top_websites()
         get_websites.create_website_config(n)
-        websites_config_file = open("AlexaTopSites/top-1m.csv", "r")
+        websites_config_file = open(CURR_DIR + "AlexaTopSites/top-1m.csv", "r")
 
 
     # Save the websites in a list while adding "http://" to the URL
@@ -190,7 +190,6 @@ def js_parser(path, method_name):
 
 
 # MAIN EXECUTION OF THE TOOL
-# parameters_array, websites_array = 
 setup(10)
 folder_cleanup(CURR_DIR, 'WebPageDownloads')
 website_counter = 0
