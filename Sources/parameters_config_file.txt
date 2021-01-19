@@ -1,0 +1,13 @@
+.getUserMedia
+.availHeight
+.availWidth
+.charCodeAt
+.colorDepth
+.getTimezoneOffset
+.javaEnabled
+.mimeType
+.platform
+.plugins
+.propertyIsEnumerable
+.referrer
+.screen
