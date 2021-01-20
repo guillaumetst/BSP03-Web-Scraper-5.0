@@ -190,44 +190,73 @@ def js_parser(path, method_name):
 
 
 # MAIN EXECUTION OF THE TOOL
+# Insert value for to use custom website list
+# Insert value != 0 to get the top n websites of Alexa List
 setup(10)
+
+# Cleanup previous executions of the program
 folder_cleanup(CURR_DIR, 'WebPageDownloads')
+
 website_counter = 0
+
+# Initialize output .csv file and its header
 filename = "parameters_counted.csv"
 file_header = ['url']
 
+# Goes through all parameters and add their name to the header
 for parameter in parameters_array:
     file_header.append(parameter)
 
+# Array that will contain all the rows to be written in the output .csv file
 row_array = []
 
+# Goes through all websites stored in the global websites_array
 for website in websites_array:
     
     print("\n CHECKING WEBSITE: ", website, "\n")
-    url = website
-    download_location = CURR_DIR
+
+    url = website # set URL value
+    download_location = CURR_DIR # set download value
+
+    # Set domain name by stripping characters from the URL
     domain_name = url.replace("http://","")
     domain_name = domain_name.replace("https://","")
     domain_name = domain_name.replace("www.", "")
     domain_name = domain_name.replace("/", "")
+
+    # Create first entry of dictionary that will serve
+    # as row for the output .csv file.
+    # "url" being the first column
     parameters_ocurrences = {'url': url}
 
     try:
+        # Save the current webpage
         savePage(url, domain_name)
 
+        # Correctly organize the downloaded files
         js_filter(download_location , domain_name)
 
+        # Goes through all parameters stored in the global parameters_array
         for parameter in parameters_array:
-            print("\n CHECKING PARAMETER: ", parameter, "\n")        
-            parameters_ocurrences[parameter] = js_parser(download_location + "WebPageDownloads/" + domain_name + '_files', parameter)
+            print("\n CHECKING PARAMETER: ", parameter, "\n")
 
+            # Add the tuple (parameter, occurence) to
+            # the dictionary that corresponds to a row      
+            parameters_ocurrences[parameter] = js_parser(download_location +
+                "WebPageDownloads/" + domain_name + '_files', parameter)
+
+        # Add the dictionary corresponding to the current row (url) to
+        # the array that contains all rows
         row_array.append(parameters_ocurrences)    
     
+    # If there has been any issue skip this website
     except:
         pass
     
     website_counter += 1
 
+# Open output .csv file and write the header followed by 
+# each row contained in the row_array variable
 with open(filename, 'w') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames = file_header, lineterminator = '\n')
     writer.writeheader()
