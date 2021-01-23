@@ -192,7 +192,7 @@ def js_parser(path, method_name):
 # MAIN EXECUTION OF THE TOOL
 # Insert value for to use custom website list
 # Insert value != 0 to get the top n websites of Alexa List
-setup(10)
+setup(0)
 
 # Cleanup previous executions of the program
 folder_cleanup(CURR_DIR, 'WebPageDownloads')
