@@ -13,5 +13,5 @@ The downloaded files will be stored in the "WebPageDownloads" folder that will b
 !!!CAUTION!!! At the start of each execution the tool will wipe out the previous "WebPageDownloads" folder and the previous "parameters_counted.csv" file.
 
 # Before running the program make sure that the correct value is inserted in the setup() function at line 193. 
-setup(0) means that the program will use the website_config_file.txt file edited by the user, using custom URLs.
+setup(0) means that the program will use the website_config_file.txt file edited by the user, using custom URLs.\\
 setup(n) for any n !=0 means that the program will use the top n websites of the Alexa Top 1M list.
